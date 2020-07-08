@@ -1,5 +1,5 @@
 (ns quo.animated
-  (:refer-clojure :exclude [set divide])
+  (:refer-clojure :exclude [set delay divide])
   (:require [reagent.core :as reagent]
             [quo.react-native :as rn]
             [quo.gesture-handler :as gh]
@@ -61,7 +61,8 @@
 (def easings {:linear      linear
               :ease-in     (bezier 0.42 0 1 1)
               :ease-out    (bezier 0 0 0.58 1)
-              :ease-in-out (bezier 0.42 0 0.58 1)})
+              :ease-in-out (bezier 0.42 0 0.58 1)
+              :keyboard    (bezier 0.17 0.59 0.4 0.77)})
 
 (defn set-value [anim val]
   (ocall anim "setValue" val))
@@ -151,10 +152,10 @@
   (.withTimingTransition ^js redash val (clj->js config)))
 
 (defn use-spring-transition [val config]
-  (.withSpringTransition ^js redash val (clj->js config)))
+  (.useSpringTransition ^js redash val (clj->js config)))
 
 (defn use-timing-transition [val config]
-  (.withTimingTransition ^js redash val (clj->js config)))
+  (.useTimingTransition ^js redash val (clj->js config)))
 
 (defn re-timing [config]
   (.timing ^js redash (clj->js config)))
@@ -173,6 +174,8 @@
 (def mix (.-mix ^js redash))
 
 (def mix-color (.-mixColor ^js redash))
+
+(def delay (.-delay ^js redash))
 
 (defn loop* [opts]
   (ocall redash "loop" (clj->js opts)))
