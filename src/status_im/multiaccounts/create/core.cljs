@@ -67,8 +67,8 @@
     (update :derived normalize-derived-data-keys)))
 
 (fx/defn create-multiaccount
-  [{:keys [db]}]
-  (let [{:keys [selected-id key-code]} (:intro-wizard db)
+  [{:keys [db]} key-code]
+  (let [{:keys [selected-id]} (:intro-wizard db)
         key-uid (some
                  (fn [{:keys [id key-uid]}]
                    (when (= id selected-id)

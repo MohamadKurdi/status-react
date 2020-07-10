@@ -77,9 +77,8 @@
 
 (fx/defn store-multiaccount
   {:events [::recover-multiaccount-confirmed]}
-  [{:keys [db]}]
-  (let [password (get-in db [:intro-wizard :key-code])
-        {:keys [root-key]} (:intro-wizard db)
+  [{:keys [db]} password]
+  (let [{:keys [root-key]} (:intro-wizard db)
         {:keys [id key-uid]} root-key
         callback #(re-frame/dispatch [::store-multiaccount-success % password])
         hashed-password (ethereum/sha3 (security/safe-unmask-data password))]
