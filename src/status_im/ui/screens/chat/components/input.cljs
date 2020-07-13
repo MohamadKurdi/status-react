@@ -69,8 +69,8 @@
            sending-image input-focus]
     :as   props}]
   [rn/view {:style (styles/toolbar)}
-   [animated/view {:flex-direction :row
-                   :padding-left   4}
+   [rn/view {:style (styles/actions-wrapper (and (not show-extensions)
+                                                 (not show-image)))}
     (when show-extensions
       [touchable-icon {:panel      :extensions
                        :active     active-panel
@@ -132,12 +132,11 @@
           (reset! had-reply reply)
           (when reply
             (js/setTimeout input-focus 250)))
-
         (when (and platform/ios? (not= @previous-layout [show-send show-stickers show-extensions]))
           (reset! previous-layout [show-send show-stickers show-extensions])
           (when (seq @previous-layout)
-            (rn/configure-next (:ease-in-ease-out rn/layout-animation-presets))))
-
+            (rn/configure-next
+             (:ease-opacity-200 rn/custom-animations))))
         [chat-input {:set-active-panel  set-active-panel
                      :active-panel      active-panel
                      :text-input-ref    text-input-ref

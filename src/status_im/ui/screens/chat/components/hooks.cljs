@@ -30,8 +30,8 @@
                      (when (and duration easing platform/ios?)
                        (rn/configure-next
                         #js {:duration (max min-duration duration)
-                             :update   {:duration (max min-duration duration)
-                                        :type     (-> ^js rn/layout-animation .-Types (aget easing))}})))
+                             :update   #js {:duration (max min-duration duration)
+                                            :type     (-> ^js rn/layout-animation .-Types (aget easing))}})))
                    (reset! keyboard {:height       new-height
                                      :end-position screen-y
                                      :duration     (max min-duration duration)

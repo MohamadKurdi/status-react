@@ -77,7 +77,7 @@
          (fn []
            (when has-panel
              ;; TODO: Check also velocity
-             (animated/cond* (animated/and* (animated/greater-or-eq drag-diff (* 0.75 panel-height))
+             (animated/cond* (animated/and* (animated/greater-or-eq drag-diff (* 0.6 panel-height))
                                             (animated/not* pan-state))
                              [(animated/call* [] on-close)])))
          [delta-y pan-state has-panel on-close])

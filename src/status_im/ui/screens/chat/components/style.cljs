@@ -47,6 +47,12 @@
            {:padding-top    2
             :padding-bottom 6})))
 
+(defn actions-wrapper [invisible]
+  {:flex-direction :row
+   :padding-left   4
+   :min-height     34
+   :left           (if invisible -88 0)})
+
 (defn touchable-icon []
   {:padding-horizontal 10
    :padding-vertical   5

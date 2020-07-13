@@ -187,7 +187,8 @@
         pan-responder    (accessory/create-pan-responder position-y pan-state)
         set-active-panel (fn [panel]
                            (reset! active-panel panel)
-                           (rn/configure-next (:ease-in-ease-out rn/layout-animation-presets))
+                           (rn/configure-next
+                            (:ease-opacity-200 rn/custom-animations))
                            (when panel
                              (js/setTimeout #(react/dismiss-keyboard!) 100)))]
     (fn []

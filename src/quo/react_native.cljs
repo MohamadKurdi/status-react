@@ -46,9 +46,30 @@
 
 (def layout-animation (.-LayoutAnimation ^js rn))
 (def configure-next (.-configureNext ^js layout-animation))
+(def create-animation (.-create ^js layout-animation))
+
 (def layout-animation-presets {:ease-in-ease-out (-> ^js layout-animation .-Presets .-easeInEaseOut)
                                :linear           (-> ^js layout-animation .-Presets .-linear)
                                :spring           (-> ^js layout-animation .-Presets .-spring)})
+
+(def layout-animation-types {:spring           (-> ^js layout-animation .-Types .-spring)
+                             :linear           (-> ^js layout-animation .-Types .-linear)
+                             :ease-in-ease-out (-> ^js layout-animation .-Types .-easeInEaseOut)
+                             :ease-in          (-> ^js layout-animation .-Types .-easeIn)
+                             :ease-out         (-> ^js layout-animation .-Types .-easeOut)})
+
+(def layout-animation-properties {:opacity  (-> ^js layout-animation .-Properties .-opacity)
+                                  :scale-x  (-> ^js layout-animation .-Properties .-scaleX)
+                                  :scale-y  (-> ^js layout-animation .-Properties .-scaleY)
+                                  :scale-xy (-> ^js layout-animation .-Properties .-scaleXY)})
+
+(def custom-animations {:ease-opacity-200 #js {:duration 200
+                                               :create   #js {:type     (:ease-in-ease-out layout-animation-types)
+                                                              :property (:opacity layout-animation-properties)}
+                                               :update   #js {:type     (:ease-in-ease-out layout-animation-types)
+                                                              :property (:opacity layout-animation-properties)}
+                                               :delete   #js {:type     (:ease-in-ease-out layout-animation-types)
+                                                              :property (:opacity layout-animation-properties)}}})
 
 (def activity-indicator-class (reagent/adapt-react-class (.-ActivityIndicator ^js rn)))
 
