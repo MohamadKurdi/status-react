@@ -4,12 +4,13 @@
             [cljs-bean.core :as bean]
             [quo.design-system.colors :as colors]
             [status-im.ui.screens.chat.components.hooks :refer [use-keyboard-dimension]]
+            [status-im.ui.components.tabbar.styles :as tabs.styles]
             [quo.react :as react]
             [quo.platform :as platform]
             [quo.react-native :as rn]
             [quo.components.safe-area :refer [use-safe-area]]))
 
-(def tabbar-height 36)
+(def tabbar-height tabs.styles/minimized-tabs-height)
 
 (defn create-pan-responder [y pan-active]
   (js->clj (.-panHandlers

@@ -103,8 +103,6 @@
    {:style    {:flex        1
                :align-items :flex-start}
     :on-press (fn [_]
-                (re-frame/dispatch
-                 [:chat.ui/set-chat-ui-props {:input-bottom-sheet nil}])
                 (react/dismiss-keyboard!))}
    (let [opts
          {:chat-id chat-id

@@ -99,6 +99,8 @@
   (let [text-input-ref  (react/create-ref)
         input-focus     (fn []
                           (some-> ^js (react/current-ref text-input-ref) .focus))
+        clear-input     (fn []
+                          (some-> ^js (react/current-ref text-input-ref) .clear))
         previous-layout (atom nil)
         had-reply       (atom nil)]
     (fn [{:keys [active-panel set-active-panel]}]
@@ -141,7 +143,8 @@
                      :text-input-ref    text-input-ref
                      :input-focus       input-focus
                      :reply             reply
-                     :on-send-press     #(re-frame/dispatch [:chat.ui/send-current-message])
+                     :on-send-press     #(do (re-frame/dispatch [:chat.ui/send-current-message])
+                                             (clear-input))
                      :text-value        input-text
                      :on-text-change    #(re-frame/dispatch [:chat.ui/set-chat-input-text %])
                      :cooldown-enabled? cooldown-enabled?

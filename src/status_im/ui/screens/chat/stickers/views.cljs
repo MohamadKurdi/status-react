@@ -19,16 +19,6 @@
 (def icon-container  (+ (* icon-horizontal-margin 2) icon-size))
 (def scroll-x (reagent/atom 0))
 
-(defn button [stickers-showing?]
-  [quo/button
-   {:on-press            (fn [_]
-                           (re-frame/dispatch [:chat.ui/set-chat-ui-props {:input-bottom-sheet (when-not stickers-showing? :stickers)}])
-                           (js/setTimeout #(react/dismiss-keyboard!) 100))
-    :accessibility-label :show-stickers-icon
-    :type                :icon
-    :theme               (if stickers-showing? :main :disabled)}
-   :main-icons/stickers])
-
 (defn- no-stickers-yet-panel []
   [react/view {:style {:flex 1 :align-items :center :justify-content :center}}
    [vector-icons/icon :stickers-icons/stickers-big {:color  colors/gray
